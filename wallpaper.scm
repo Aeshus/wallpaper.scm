@@ -19,25 +19,23 @@
    #vu8(254 128 25)
    #vu8(184 187 38)))
 
-;; Random color index
-(define (make-next-color! n)
-  "Creates a counter which takes a number, increments it by one, and returns the number."
-
-(define a (make-next-color! 1))
-(a)
-=> 1
-(a)
-=> 2"
-  (lambda ()
-    (define last-n n)
-    (set! n (+ n 1))
-    last-n))
-
-(define next-color!
-  (make-next-color! (random 100)))
-
-
-;; Map color index to color
+;;; next-number!
+;; Takes an initial starting number (depends on random state), and simply increments it each time it is called.
+;; Implemented as a simple clojure, inspiration from Guile Docs (See 3.4.7)
+;;
+;; @example
+;; scheme@(guile-user)> (next-number!)
+;; $1 = 61
+;; scheme@(guile-user)> (next-number!)
+;; $2 = 62
+;; @end example
+(define next-number! #f)
+(let ((number (random 100)))
+  (set! next-number!
+        (lambda ()
+          (define last-number number)
+          (set! number (+ number 1))
+          last-number)))
 (define (get-color colors number)
   "Glorified \"Get value at index\" function. Takes a list of colors and the index. Wraps the index around the list to make sure it doesn't overflow.
 
@@ -69,10 +67,10 @@ It returns a list of format: (((x . y) color) ((x . y) color))
     (if (= number 1)
       (list (cons
              (random-position max-width max-height)
-             (list (get-color colors (next-color!)))))
+             (list (get-color colors (next-number!)))))
       (cons (cons
              (random-position max-width max-height)
-             (list (get-color colors (next-color!)))) (create-seeds (- number 1) max-width max-height colors))))
+             (list (get-color colors (next-number!)))) (create-seeds (- number 1) max-width max-height colors))))
 
 (define (get-closest-seed pixel seeds formula)
   (define (inner pixel seeds formula shortest)
