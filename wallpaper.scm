@@ -1,9 +1,14 @@
-(use-modules (ice-9 binary-ports)
+(use-modules (ice-9 binary-ports) ; Writing bytes to files
              (srfi srfi-1))
 
-(set! *random-state* (random-state-from-platform)) ; Enables random state
 
-;; Simply a placeholder list that contains gruvbox colors
+;; Enables random state in Guile
+;; (See 6.2.2.14 of Guile Docs)
+(set! *random-state* (random-state-from-platform))
+
+;;; color-list
+;; @code{color-list} is placeholder list containing the byte representation of (r g b) colors.
+;; These are gruvbox themed.
 (define color-list
   (list
    #vu8(251 73 27)
