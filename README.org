@@ -1,0 +1,12 @@
+* Wallpaper.scm
+
+Custom wallpaper generator by Aeshus.
+It generates a Voronoi Diagram, and looks pretty cool
+
+** Example:
+
+#+BEGIN_SRC sh
+make generate-image
+#+END_SRC
+
+Which then builds the image in "\/tmp\/wallpaper.ppm"
