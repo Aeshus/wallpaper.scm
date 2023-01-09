@@ -55,12 +55,17 @@
           (car colors)
           (get-color (cdr colors) (- number 1)))))
 
-;; Generate random (x . y) pairs for seeds
+;;; random-position
+;; Generates random (x . y) pairs for seed locations
+;;
+;; @example
+;; scheme@(guile-user)> (random-position 100 100)
+;; $1 = (67 . 28)
+;; scheme@(guile-user)> (random-position 100 100)
+;; $2 = (98 . 39)
+;; @end example
 (define (random-position max-width max-height)
-  "Takes a maximum (x,y) and returns a list containing (x . y)
-
-(random-position 100 100)
-=> (39 . 18)"
+  "Takes a maximum @code{x} and @code{y} and returns a list containing @code{(x . y)}"
   (cons (random max-width) (random max-height)))
 
 ;; Create Image
