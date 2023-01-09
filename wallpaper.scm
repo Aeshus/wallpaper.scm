@@ -36,13 +36,19 @@
           (define last-number number)
           (set! number (+ number 1))
           last-number)))
-(define (get-color colors number)
-  "Glorified \"Get value at index\" function. Takes a list of colors and the index. Wraps the index around the list to make sure it doesn't overflow.
 
-(get-color (list '(1 2 3) '(2 3 4)) 0)
-=> (1 2 3)
-(get-color (list '(1 2 3) '(2 3 4)) 100)
-=> (1 2 3)"
+;;; get-color
+;; Gets the element in a list, depending on it's index, and is wrapped around the length of the list.
+;;
+;; @example
+;; scheme@(guile-user)> (define colors (list '(1 2 3) '(4 5 6) '(7 8 9)))
+;; scheme@(guile-user)> (get-colors colors 0)
+;; $1 = (1 2 3)
+;; scheme@(guile-user)> (get-colors colors 100)
+;; $2 = (4 5 6)
+;; @end example
+(define (get-color colors number)
+  "Glorified \"Get value at index\" function. Takes a list of colors and the index. Wraps the index around the list to make sure it doesn't overflow."
   (if (> number (floor-remainder number (length colors)))
       (get-color colors (floor-remainder number (length colors)))
       (if (= number 0)
