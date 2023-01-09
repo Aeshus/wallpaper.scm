@@ -16,7 +16,7 @@
 
 ;; Random color index
 (define (make-next-color! n)
-  "Creates a counter which takes a number, increments it by one, and returns the number.
+  "Creates a counter which takes a number, increments it by one, and returns the number."
 
 (define a (make-next-color! 1))
 (a)
@@ -57,7 +57,7 @@
 ;; Create Image
 (define (create-seeds number max-width max-height colors)
   "Takes the number of seeds, an x and y maximum, and a list of colors to iterate over.
-It returns a list of format: \"(((x . y) color) ((x . y) color))\"
+It returns a list of format: (((x . y) color) ((x . y) color))
 
 (create-seeds 3 10 10 '(1 2))
 => (((5 . 1) 1) ((9 . 9) 2) ((4 . 0) 1))"
