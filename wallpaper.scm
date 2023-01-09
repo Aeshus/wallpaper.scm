@@ -94,16 +94,6 @@ It returns a list of format: (((x . y) color) ((x . y) color))
 
   (inner pixel seeds formula (car seeds)))
 
-;; Version that uses guile custom arguments, though really isn't needed.
-;; (define* (get-closest-seed pixel seeds formula #:optional shortest)
-;;   (if (eq? shortest #f)
-;;       (get-closest-seed pixel (cdr seeds) formula (car seeds))
-;;       (if (null? seeds)
-;;           shortest
-;;           (if (> (formula pixel (car shortest))
-;;                  (formula pixel (car (car seeds))))
-;;               (get-closest-seed pixel (cdr seeds) formula (car seeds))
-;;               (get-closest-seed pixel (cdr seeds) formula shortest)))))
 
 (define (build-image seeds max-width max-height output-port formula)
   "Creates an image by iterating over all of the pixels, comparing distances through the formula, sets their color, and writes it to the file"
