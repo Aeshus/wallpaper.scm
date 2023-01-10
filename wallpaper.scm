@@ -69,12 +69,19 @@
   (cons (random max-width) (random max-height)))
 
 ;; Create Image
+;;; create-seeds
+;; Generates a list of seeds using a x and y bound, and appends the color to the end.
+;;
+;; @example
+;; scheme@(guile-user)> (define colors (list '(1 2 3) '(4 5 6) '(7 8 9)))
+;; scheme@(guile-user)> (create-seeds 3 100 100 colors)
+;; $1 = (((55 . 10) (1 2 3))
+;;       ((27 . 76) (4 5 6))
+;;       ((13 . 81) (7 8 9)))
+;; @end example
 (define (create-seeds number max-width max-height colors)
   "Takes the number of seeds, an x and y maximum, and a list of colors to iterate over.
-It returns a list of format: (((x . y) color) ((x . y) color))
-
-(create-seeds 3 10 10 '(1 2))
-=> (((5 . 1) 1) ((9 . 9) 2) ((4 . 0) 1))"
+It returns a list of format: (((x . y) color) ((x . y) color))"
     (if (= number 1)
       (list (cons
              (random-position max-width max-height)
