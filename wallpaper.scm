@@ -68,7 +68,6 @@
   "Takes a maximum @code{x} and @code{y} and returns a list containing @code{(x . y)}"
   (cons (random max-width) (random max-height)))
 
-;; Create Image
 ;;; create-seeds
 ;; Generates a list of seeds using a x and y bound, and appends the color to the end.
 ;;
@@ -90,7 +89,17 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
              (random-position max-width max-height)
              (list (get-color colors (next-number!)))) (create-seeds (- number 1) max-width max-height colors))))
 
+;;; get-closest-seed
+;; Gets the closest seed depending on the pixel.
+;;
+;; @example
+;; scheme@(guile-user)> (define seeds '(((55 . 10) '(1 2 3)) '((27 . 76) '(2 3 4))))
+;; scheme@(guile-user)> (define pixel '(10 . 10))
+;; scheme@(guile-user)> (get-closest-seed pixel seeds calculate-manhattan-distance)
+;; $1 = ((55 . 10) '(1 2 3))
+;; @end example
 (define (get-closest-seed pixel seeds formula)
+  "Returns the closest seed ((x . y) color) to the given pixel (x . y)"
   (define (inner pixel seeds formula shortest)
     (if (null? seeds)
         shortest
