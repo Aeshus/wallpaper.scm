@@ -110,7 +110,6 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
 
   (inner pixel seeds formula (car seeds)))
 
-
 ;;; build-image
 ;; Writes image to output-port in (ppm) format, using the given seeds, bounds, and formula
 ;;
@@ -162,7 +161,15 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
     (newline output-port)
     (close output-port)))
 
-;; Calculate Distances
+;;; calculate-manhattan-distance
+;; Simply calculates the manhattan distance between two points.
+;;
+;; @example
+;; scheme@(guile-user)> (calculate-manhattan-distance '(1 . 2) '(3 . 4))
+;; $1 = 4
+;; scheme@(guile-user)> (calculate-manhattan-distance '(3 . 4) '(5 . 6))
+;; $2 = 4
+;; @end example
 (define (calculate-manhattan-distance start end)
   "Takes two points (start-x . start-y) and (end-x . end-y), and returns the distance between the two, using Manhattan Distance
 
@@ -173,11 +180,18 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
        (abs
         (- (cdr start) (cdr end)))))
 
+;;; calculate-euclidean-distance
+;; Simply calculates the euclidean distance between two points, *squared*.
+;; It is left squared as it's distance itself doesn't matter, but instead it's relative
+;; distance compared to others.
+;;
+;; @example
+;; scheme@(guile-user)> (calculate-euclidean-distance '(1 . 2) '(3 . 4))
+;; $1 = 8
+;; scheme@(guile-user)> (calculate-euclidean-distance '(3 . 4) '(5 . 6))
+;; $2 = 8
+;; @end example
 (define (calculate-euclidean-distance start end)
-  "Takes two points (start-x . start-y) and (end-x . end-y), and returns the euclidean distance squared (which is fine for distance comparison)
-
-(calculate-euclidean-distance '(1 . 2) '(3 . 4))
-=> 8"
   (+ (*
       (- (car start) (car end))
       (- (car start) (car end)))
