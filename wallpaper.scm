@@ -175,10 +175,8 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
 
 (calculate-manhattan-distance '(1 . 2) '(3 . 4))
 => 4"
-    (+ (abs
-        (- (car start) (car end)))
-       (abs
-        (- (cdr start) (cdr end)))))
+    (+ (abs (- (car start) (car end)))
+       (abs (- (cdr start) (cdr end)))))
 
 ;;; calculate-euclidean-distance
 ;; Simply calculates the euclidean distance between two points, *squared*.
@@ -192,12 +190,9 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
 ;; $2 = 8
 ;; @end example
 (define (calculate-euclidean-distance start end)
-  (+ (*
-      (- (car start) (car end))
-      (- (car start) (car end)))
-     (*
-      (- (cdr start) (cdr end))
-      (- (cdr start) (cdr end)))))
+  "Takes two points (start-x . start-y) and (end-x . end-y), and returns the euclidean distance squared (which is fine for distance comparison)"
+  (+ (expt (- (car start) (car end)) 2)
+     (expt (- (cdr start) (cdr end)) 2)))
 
 ;; Generates image
 (create-image 50 1920 1080 color-list calculate-manhattan-distance "/tmp/wallpaper.ppm")
