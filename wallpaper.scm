@@ -111,6 +111,18 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
   (inner pixel seeds formula (car seeds)))
 
 
+;;; build-image
+;; Writes image to output-port in (ppm) format, using the given seeds, bounds, and formula
+;;
+;; @example
+;; scheme@(guile-user)> (define seeds '(((55 . 10) '(1 2 3)) '((27 . 76) '(2 3 4))))
+;; scheme@(guile-user)> (define port '(output-port (open-file "/tmp/a.ppm" "w")))
+;; scheme@(guile-user)> (define formula
+;;                        (+ (expt (- (car start) (car end)) 2)
+;;                           (expt (- (cdr start) (cdr end)) 2))
+;; scheme@(guile-user)> (build-image seeds 100 100 port formula)
+;; => /tmp/a.ppm
+;; @end example
 (define (build-image seeds max-width max-height output-port formula)
   "Creates an image by iterating over all of the pixels, comparing distances through the formula, sets their color, and writes it to the file"
 
