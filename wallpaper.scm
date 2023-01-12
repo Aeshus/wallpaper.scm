@@ -160,6 +160,14 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
   (define output-port (open-file path "a"))
   (build-image seeds width height output-port formula))
 
+;;; initialize-file
+;; Initializes the file according to the PPM file specification.
+;; Probably could be implemented better, but simply prints content to file.
+;;
+;; @example
+;; scheme@(guile-user)> (initialize-file 100 100 "/tmp/out.ppm")
+;; => /tmp/out.ppm
+;; @example end
 (define (initialize-file width height path)
   "Writes out boilerplate for a PPM file"
   (let ((output-port (open-file path "w")))
