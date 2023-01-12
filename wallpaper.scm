@@ -141,12 +141,24 @@ It returns a list of format: (((x . y) color) ((x . y) color))"
 
   (build-image-column 0))
 
+;;; create-image
+;; Main function of the program.
+;; Initializes the ppm file, builds the seeds, opens the file, and then builds it.
+;;
+;; @example
+;; scheme@(guile-user)> (define colors (list '(1 2 3) '(4 5 6) '(7 8 9)))
+;; scheme@(guile-user)> (define formula
+;;                        (+ (expt (- (car start) (car end)) 2)
+;;                           (expt (- (cdr start) (cdr end)) 2))
+;; scheme@(guile-user)> (create-image 10 100 100 colors formula "/tmp/out.ppm")
+;; => /tmp/out.ppm
+;; @end example
 (define (create-image seed-num width height colors formula path)
-  "Runs through the steps of creating a PPM image, calling all of the functions"
-    (initialize-file width height path)
-    (define seeds (create-seeds seed-num width height colors))
-    (define output-port (open-file path "a"))
-    (build-image seeds width height output-port formula))
+  "Builds image to ppm file"
+  (initialize-file width height path)
+  (define seeds (create-seeds seed-num width height colors))
+  (define output-port (open-file path "a"))
+  (build-image seeds width height output-port formula))
 
 (define (initialize-file width height path)
   "Writes out boilerplate for a PPM file"
