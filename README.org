@@ -1,5 +1,7 @@
 * Wallpaper.scm
 
+[[./.github/voronoi.png]]
+
 Custom wallpaper generator by Aeshus.
 It generates a Voronoi Diagram, and looks pretty cool
 
